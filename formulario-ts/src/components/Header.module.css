@@ -1,0 +1,15 @@
+.header {
+  background-color: #6495ED;
+  display: flex;
+  justify-content: center;
+  padding: 1.25rem 0;
+}
+
+.header img {
+  height: 5rem;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+}

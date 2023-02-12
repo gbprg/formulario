@@ -1,0 +1,26 @@
+.sectionContent {
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+  html {
+    font-size: 87.5%;
+  }
+  .sectionContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .sectionContent aside {
+    width: 100%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+  html {
+    font-size: 92.5%;
+  }
+}
