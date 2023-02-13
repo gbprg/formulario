@@ -1,6 +1,8 @@
 import Header from "./components/Header"
 import Post from "./components/Post"
 import Sidebar from "./components/Sidebar"
+import ModalLib from "react-modal"
+import { ChangeEvent, useState } from "react"
 
 import styles from "./App.module.css"
 
@@ -37,13 +39,93 @@ const posts = [
   },
 ]
 
+type ModalProfile = {
+  style: {
+    color: string
+  };
+}| null;
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
 export default function App() {
+  let subtitle: ModalProfile;
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [cargo, setCargo] = useState('Web Developer');
+  const [nome, setNome] = useState('Gabriel Duarte');
+  const [inputValue, setInputValue] = useState('');
+  const [inputValueCargo, setInputValueCargo] = useState('');
+
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle!.style.color = '#6495ED';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function MudarNome() {
+    if(inputValue === ''){
+      return;
+    }
+    setNome(inputValue);
+  }
+
+  function handleInput(event: any){
+    setInputValue(event.target.value);
+  }
+
+  function MudarCargo() {
+    if(inputValueCargo === ''){
+      return;
+    }
+    setCargo(inputValueCargo);
+  }
+
+  function handleInputCargo(event: any) {
+    setInputValueCargo(event.target.value);
+  }
 
   return (
     <div>
       <Header/>
       <div className={styles.sectionContent}>
-        <Sidebar/>
+        <Sidebar openModal={openModal} mudarNome={MudarNome} cargo={cargo} nome={nome} MudarCargo={MudarCargo}/>
+        <ModalLib
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <button className={styles.btnModal} onClick={closeModal}>close</button>
+        <h2 className={styles.titleModal} ref={(_subtitle) => (subtitle = _subtitle)}>NOME</h2>
+        <form>
+          <input className={styles.inputModal} value={inputValue}
+          onChange={handleInput}
+          />
+          <button className={styles.btnModalDois} onClick={MudarNome}>Mudar Nome</button>
+          <h2 className={styles.titleModal} ref={(_subtitle) => (subtitle = _subtitle)}>CARGO</h2>
+          <input className={styles.inputModal} value={inputValueCargo}
+          onChange={handleInputCargo}
+          />
+          <button className={styles.btnModalDois} onClick={MudarCargo}>Mudar Cargo</button>
+        </form>
+      </ModalLib>
         <main>
           {posts.map(post => {
             return (
@@ -58,7 +140,7 @@ export default function App() {
         </main>
       </div>
     </div>
-  
+
   )
 }
 

@@ -6,6 +6,27 @@
   align-items: flex-start;
   justify-content: center;
 }
+.btnModal, .btnModalDois {
+  background: #6495ED;
+  color: #fff;
+  border: 1px solid #6495ED;
+  border-radius: 8px;
+  padding: 5px;
+  margin-left: 20rem;
+}
+.btnModalDois {
+  margin-left: -0.688rem !important;
+}
+.titleModal {
+  color: #6495ED;
+  padding-bottom: 5px;
+}
+.inputModal {
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 0.25rem;
+  margin-right: 3.7rem;
+}
 @media (max-width: 768px) {
   html {
     font-size: 87.5%;

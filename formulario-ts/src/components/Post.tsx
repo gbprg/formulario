@@ -12,7 +12,7 @@ interface Author {
   avatarUrl: string;
 }
 interface Content {
-  type: "paragraph" | "link";
+  type: string;
   content: string;
 }
 interface PostProps {
